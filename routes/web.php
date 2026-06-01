@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
+Route::get('/Clientes', function () {
     return view('Client.main');
 })->name('mainClient');
 
@@ -11,6 +12,8 @@ Route::get('/registro', function () {
     return view('Client.Register');
 })->name('register');
  
+Route::get('/', [ProductController::class, 'index']);
+
 // Route::get('/greeting', function () {
 //     return 'Hello World';
 // });
