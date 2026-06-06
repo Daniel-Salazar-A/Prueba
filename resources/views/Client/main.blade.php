@@ -20,6 +20,8 @@
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Descripcion</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +31,16 @@
                     <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->precio }}</td>
                     <td>{{ $producto->descripcion }}</td>
+                    <td>
+                        <a href="{{ route('editProduct', $producto->id) }}" class="btn btn-info btn-sm">Editar</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('destroyProduct', $producto->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
