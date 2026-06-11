@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UsuarioController;
 
 // Route::get('/Clientes', function () {
 //     return view('Client.main');
@@ -17,8 +18,12 @@ Route::get('/create', [ProductController::class, 'create'])->name('createProduct
 Route::post('/store', [ProductController::class, 'store'])->name('storeProduct');
 Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('editProduct');
 Route::put('/update/{id}', [ProductController::class, 'update'])->name('updateProduct');
-// Route::get('/show/{id}', [ProductController::class, 'show'])->name('showProduct');
 Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('destroyProduct');
+
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('client.index');
+Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('client.Register');
+Route::post('/usuarios/store', [UsuarioController::class, 'store'])->name('client.store');
+
 // Route::get('/greeting', function () {
 //     return 'Hello World';
 // });
