@@ -27,4 +27,9 @@ class usuario extends Model
             'contraseña' => 'hashed'
         ];
     }
+
+    public function getAuthPassword()
+    {
+        return $this->contraseña;
+    }
 }

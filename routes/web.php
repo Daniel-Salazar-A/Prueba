@@ -24,6 +24,9 @@ Route::get('/usuarios', [UsuarioController::class, 'index'])->name('client.index
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('client.Register');
 Route::post('/usuarios/store', [UsuarioController::class, 'store'])->name('client.store');
 
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'loginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
+
 // Route::get('/greeting', function () {
 //     return 'Hello World';
 // });
