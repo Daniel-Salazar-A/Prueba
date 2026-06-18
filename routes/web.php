@@ -13,7 +13,8 @@ Route::get('/registro', function () {
     return view('Client.Register');
 })->name('register');
  
-Route::get('/', [ProductController::class, 'index'])->name('mainClient');
+Route::get('/', [ProductController::class, 'index'])->name('mainClient')->middleware('auth');
+//Route::get('/', [ProductController::class, 'index'])->name('mainClient');
 Route::get('/create', [ProductController::class, 'create'])->name('createProduct');
 Route::post('/store', [ProductController::class, 'store'])->name('storeProduct');
 Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('editProduct');
@@ -25,7 +26,7 @@ Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('clie
 Route::post('/usuarios/store', [UsuarioController::class, 'store'])->name('client.store');
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'loginForm'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('login.submit');
 
 // Route::get('/greeting', function () {
 //     return 'Hello World';

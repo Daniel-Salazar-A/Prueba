@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -14,18 +14,22 @@ class LoginController extends Controller
         return view('Client.login');
     }
 
-    public function login(Request $request)
+    public function authenticate(Request $request): RedirectResponse
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'correo' => ['required', 'email'],
+            'contraseña' => ['required'],
+        ]);
 
         if (Auth::attempt($credentials)) {
+            dd('ENTRO AL LOGIN CORRECTO');
             $request->session()->regenerate();
-            return redirect()->intended('mainClient');
+            return redirect()->intended('mainClient')->with('success', 'Inicio de sesión exitoso.');
         }
 
         return back()->withErrors([
-            'email' => 'Las credenciales no son correctas.',
-        ]);
+            'correo' => 'The provided credentials do not match our records.',
+        ])->onlyInput('correo');
     }
 
     public function logout(Request $request)

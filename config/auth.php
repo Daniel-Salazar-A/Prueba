@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\usuario;
 
 return [
 
@@ -40,7 +41,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'usuarios',
         ],
 
         'usuarios' => [
@@ -67,6 +68,7 @@ return [
     */
 
     'providers' => [
+
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
@@ -74,7 +76,7 @@ return [
 
         'usuarios' => [
             'driver' => 'eloquent',
-            'model' => App\Models\usuario::class,
+            'model' => env('AUTH_MODEL', usuario::class),
         ],
     ],
 
