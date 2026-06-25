@@ -11,26 +11,26 @@ class usuario extends Authenticatable
 
     protected $fillable = [
         'nombre',
-        'correo',
-        'contraseña',
+        'email',
+        'password',
         'rol',
         'telefono'
     ];
 
     protected $hidden = [
-        'contraseña',
+        'password',
         'remember_token'
     ];
 
     protected function casts(): array
     {
         return [
-            'contraseña' => 'hashed'
+            'password' => 'hashed'
         ];
     }
 
     public function getAuthPassword()
     {
-        return $this->contraseña;
+        return $this->password;
     }
 }

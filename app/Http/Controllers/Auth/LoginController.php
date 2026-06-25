@@ -17,19 +17,19 @@ class LoginController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'correo' => ['required', 'email'],
-            'contraseña' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
-            dd('ENTRO AL LOGIN CORRECTO');
+            //dd('ENTRO AL LOGIN CORRECTO');
             $request->session()->regenerate();
-            return redirect()->intended('mainClient')->with('success', 'Inicio de sesión exitoso.');
+            return redirect()->route('mainClient')->with('success', 'Inicio de sesión exitoso.');
         }
-
+        
         return back()->withErrors([
-            'correo' => 'The provided credentials do not match our records.',
-        ])->onlyInput('correo');
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     public function logout(Request $request)
