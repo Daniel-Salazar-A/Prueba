@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Auth\LoginController;
 
 // Route::get('/Clientes', function () {
 //     return view('Client.main');
@@ -13,7 +14,7 @@ Route::get('/registro', function () {
     return view('Client.Register');
 })->name('register');
  
-Route::get('/', [ProductController::class, 'index'])->name('mainClient')->middleware('auth');
+Route::get('/', [ProductController::class, 'index'])->name('mainClient')->middleware(['auth', 'ReglasDeMiMiddleware']);
 //Route::get('/', [ProductController::class, 'index'])->name('mainClient');
 Route::get('/create', [ProductController::class, 'create'])->name('createProduct');
 Route::post('/store', [ProductController::class, 'store'])->name('storeProduct');
@@ -25,8 +26,8 @@ Route::get('/usuarios', [UsuarioController::class, 'index'])->name('client.index
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('client.Register');
 Route::post('/usuarios/store', [UsuarioController::class, 'store'])->name('client.store');
 
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'loginForm'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('login.submit');
+Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.submit');
 
 // Route::get('/greeting', function () {
 //     return 'Hello World';

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\usuario;
+use Illuminate\Support\Facades\Log;
 
 class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = \App\Models\usuario::all();
+        $usuarios = usuario::all();
+        Log::info('Usuarios obtenidos: ' . $usuarios->count());
         return view('usuarios.index', compact('usuarios'));
     }
 
